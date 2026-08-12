@@ -96,7 +96,6 @@ jobs:
       - name: Terraform Plan
         run: |
           terraform plan \
-            -var="db_username=${{ secrets.DB_USERNAME }}" \
             -out=tfplan
         working-directory: terraform
 
