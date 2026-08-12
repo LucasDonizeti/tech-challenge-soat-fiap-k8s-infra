@@ -20,7 +20,7 @@ jobs:
   terraform-bootstrap:
     name: Bootstrap Terraform Backend
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.event_name == 'push'
 
     steps:
       - uses: actions/checkout@v4
@@ -65,7 +65,7 @@ jobs:
     name: Terraform Plan
     runs-on: ubuntu-latest
     needs: terraform-bootstrap
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.event_name == 'push'
 
     steps:
       - uses: actions/checkout@v4
@@ -112,7 +112,7 @@ jobs:
     name: Terraform Apply
     runs-on: ubuntu-latest
     needs: terraform-plan
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.event_name == 'push'
     outputs:
       rds_endpoint: ${{ steps.tf-outputs.outputs.rds_endpoint }}
 
