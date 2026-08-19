@@ -96,6 +96,7 @@ jobs:
       - name: Terraform Plan
         run: |
           terraform plan \
+            -input=false \
             -out=tfplan
         working-directory: terraform
 

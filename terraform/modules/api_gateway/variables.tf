@@ -18,11 +18,6 @@ variable "private_subnets" {
   type        = list(string)
 }
 
-variable "internal_nlb_listener_arn" {
-  description = "ARN do listener do NLB interno para integração"
-  type        = string
-}
-
 variable "tags" {
   type    = map(string)
   default = {}
