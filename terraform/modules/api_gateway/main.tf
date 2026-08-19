@@ -43,7 +43,7 @@ resource "aws_apigatewayv2_vpc_link" "eks_vpc_link" {
 
 # 4. Target Group alterado para o tipo IP
 resource "aws_lb_target_group" "eks_nodes_tg" {
-  name        = "${var.name}-eks-tg"
+  name_prefix = "${var.name}-eks-tg"
   port        = 30080
   protocol    = "TCP"
   vpc_id      = var.vpc_id
