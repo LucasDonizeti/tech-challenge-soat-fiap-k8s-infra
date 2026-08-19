@@ -72,10 +72,10 @@ module "ecr_auth_lambda" {
 module "api_gateway" {
   source = "./modules/api_gateway"
 
-  name                    = "${var.app_name}-api-gateway"
-  vpc_id                  = module.vpc.vpc_id
-  vpc_cidr                = var.vpc_cidr
-  private_subnets         = module.vpc.private_subnets
+  name                      = "${var.app_name}-api-gateway"
+  vpc_id                    = module.vpc.vpc_id
+  vpc_cidr                  = var.vpc_cidr
+  private_subnets           = module.vpc.private_subnets
   internal_nlb_listener_arn = var.internal_nlb_listener_arn
 
   tags = { Project = var.app_name }
