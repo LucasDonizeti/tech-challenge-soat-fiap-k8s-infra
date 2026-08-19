@@ -54,6 +54,10 @@ resource "aws_lb_target_group" "eks_nodes_tg" {
     port     = "30080"
   }
 
+  lifecycle {
+    create_before_destroy = true
+  }
+
   tags = var.tags
 }
 
