@@ -17,7 +17,7 @@ resource "aws_security_group" "vpc_link_sg" {
   vpc_id      = var.vpc_id
 
   ingress {
-    description = "Tráfego do API Gateway via VPC Link"
+    description = "Trafego do API Gateway via VPC Link"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -34,31 +34,69 @@ resource "aws_security_group" "vpc_link_sg" {
   tags = merge(var.tags, { Name = "${var.name}-vpc-link-sg" })
 }
 
-# 3. VPC Link para conectar o API Gateway aos Serviços do EKS (Load Balancer interno)
+# 3. VPC Link
 resource "aws_apigatewayv2_vpc_link" "eks_vpc_link" {
   name               = "${var.name}-vpc-link"
   security_group_ids = [aws_security_group.vpc_link_sg.id]
   subnet_ids         = var.private_subnets
 }
 
-# 4. Integração das rotas com o EKS (VPC Link)
+# 4. Target Group
+resource "aws_lb_target_group" "eks_nodes_tg" {
+  name        = "${var.name}-eks-tg"
+  port        = 30080
+  protocol    = "TCP"
+  vpc_id      = var.vpc_id
+  target_type = "instance"
+
+  health_check {
+    protocol = "TCP"
+    port     = "30080"
+  }
+
+  tags = var.tags
+}
+
+# 5. NLB Interno
+resource "aws_lb" "internal_nlb" {
+  name               = "${var.name}-nlb"
+  internal           = true
+  load_balancer_type = "network"
+  subnets            = var.private_subnets
+
+  tags = var.tags
+}
+
+# 6. Listener do NLB
+resource "aws_lb_listener" "internal_nlb_listener" {
+  load_balancer_arn = aws_lb.internal_nlb.arn
+  port              = 80
+  protocol          = "TCP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.eks_nodes_tg.arn
+  }
+}
+
+# 7. Integração com VPC Link
 resource "aws_apigatewayv2_integration" "eks_integration" {
   api_id             = aws_apigatewayv2_api.main_gateway.id
   integration_type   = "HTTP_PROXY"
-  integration_uri    = var.internal_nlb_listener_arn
+  integration_uri    = aws_lb_listener.internal_nlb_listener.arn
   integration_method = "ANY"
   connection_type    = "VPC_LINK"
   connection_id      = aws_apigatewayv2_vpc_link.eks_vpc_link.id
 }
 
-# 5. Rota genérica para enviar todas as requisições de negócio ao EKS
+# 8. Rota genérica
 resource "aws_apigatewayv2_route" "eks_route" {
   api_id    = aws_apigatewayv2_api.main_gateway.id
   route_key = "ANY /{proxy+}"
   target    = "integrations/${aws_apigatewayv2_integration.eks_integration.id}"
 }
 
-# 6. Stage Padrão com auto-deploy ativo (Essencial para as rotas funcionarem)
+# 9. Stage Padrão
 resource "aws_apigatewayv2_stage" "default_stage" {
   api_id      = aws_apigatewayv2_api.main_gateway.id
   name        = "$default"
