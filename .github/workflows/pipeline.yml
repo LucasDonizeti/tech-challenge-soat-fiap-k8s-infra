@@ -11,7 +11,7 @@ on:
 env:
   AWS_REGION: us-east-1
   TF_STATE_BUCKET: bucket-tfstate-1029
-  TF_STATE_KEY: global/s3/terraform.tfstate
+  TF_STATE_KEY: k8s/terraform.tfstate
   TF_DYNAMODB_TABLE: meu-terraform-state-lock
   EKS_CLUSTER_NAME: oficina-cluster
 
@@ -112,8 +112,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: terraform-plan
     if: github.event_name == 'push'
-    outputs:
-      rds_endpoint: ${{ steps.tf-outputs.outputs.rds_endpoint }}
 
     steps:
       - uses: actions/checkout@v4
@@ -149,12 +147,6 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -auto-approve tfplan
-        working-directory: terraform
-
-      - name: Capturar outputs do Terraform
-        id: tf-outputs
-        run: |
-          echo "rds_endpoint=$(terraform output -raw rds_endpoint)" >> $GITHUB_OUTPUT
         working-directory: terraform
 
       - name: Configurar kubectl

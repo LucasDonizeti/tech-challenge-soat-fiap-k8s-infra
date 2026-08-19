@@ -15,7 +15,7 @@ output "eks_cluster_endpoint" {
 
 output "ecr_repository_url" {
   description = "URL do repositório ECR para a pipeline"
-  value       = module.ecr.repository_url
+  value       = module.ecr_oficina_api.repository_url
 }
 
 output "database_subnets" {
@@ -31,4 +31,24 @@ output "db_subnet_group_name" {
 output "eks_node_security_group_id" {
   description = "Security Group ID do cluster EKS usado pelo RDS"
   value       = module.eks.node_security_group_id
+}
+
+output "ecr_auth_lambda_url" {
+  description = "URL do repositório ECR para o lambda authorizer"
+  value       = module.ecr_auth_lambda.repository_url
+}
+
+output "api_gateway_id" {
+  description = "ID do API Gateway"
+  value       = module.api_gateway.api_gateway_id
+}
+
+output "api_gateway_execution_arn" {
+  description = "ARN de execução do API Gateway para permissões do Lambda"
+  value       = module.api_gateway.api_gateway_execution_arn
+}
+
+output "private_subnets" {
+  description = "IDs das subnets privadas para Lambda"
+  value       = module.vpc.private_subnets
 }
