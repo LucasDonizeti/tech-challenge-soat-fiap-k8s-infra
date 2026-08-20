@@ -53,6 +53,22 @@ resource "aws_security_group" "nodes" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    description = "Permitir Health Check do NLB na porta 30080"
+    from_port   = 30080
+    to_port     = 30080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "Permitir comunicacao do Control Plane com o Kubelet"
+    from_port   = 10250
+    to_port     = 10250
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -64,6 +80,17 @@ resource "aws_security_group" "nodes" {
 }
 
 # 3. Node Group Gerenciado — nodes ficam nas subnets privadas
+resource "aws_launch_template" "nodes" {
+  name_prefix            = "${var.cluster_name}-node-lt-"
+  vpc_security_group_ids = [aws_security_group.nodes.id] # <--- Associa o SG customizado
+
+  tags = var.tags
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 resource "aws_eks_node_group" "main" {
   cluster_name    = aws_eks_cluster.this.name
   node_group_name = "main"
@@ -78,10 +105,20 @@ resource "aws_eks_node_group" "main" {
 
   instance_types = ["t3.medium"]
 
+  # Associação do Launch Template
+  launch_template {
+    id      = aws_launch_template.nodes.id
+    version = aws_launch_template.nodes.latest_version
+  }
+
   tags = var.tags
 
-  depends_on = [aws_eks_cluster.this]
+  depends_on = [
+    aws_eks_cluster.this,
+    aws_launch_template.nodes
+  ]
 }
+
 
 # 4. Add-ons
 resource "aws_eks_addon" "addons" {
@@ -113,4 +150,3 @@ resource "aws_eks_access_policy_association" "lab_role_admin" {
     type = "cluster"
   }
 }
-

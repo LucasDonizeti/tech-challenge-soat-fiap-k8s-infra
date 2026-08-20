@@ -18,6 +18,11 @@ variable "private_subnets" {
   type        = list(string)
 }
 
+variable "eks_node_group_asg_name" {
+  description = "Nome do Auto Scaling Group (ASG) criado pelo Node Group do EKS"
+  type        = string
+}
+
 variable "tags" {
   type    = map(string)
   default = {}
