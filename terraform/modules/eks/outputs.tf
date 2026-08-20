@@ -13,5 +13,10 @@ output "cluster_certificate_authority_data" {
 
 output "node_security_group_id" {
   description = "SG dos nodes — usado pelo RDS para permitir acesso na porta 3306"
-  value       = aws_eks_cluster.this.vpc_config[0].cluster_security_group_id
+  value       = aws_security_group.nodes.id
+}
+
+output "node_group_autoscaling_group_names" {
+  description = "Lista com o nome dos Auto Scaling Groups criados pelo Node Group do EKS"
+  value       = aws_eks_node_group.main.resources[0].autoscaling_groups[*].name
 }

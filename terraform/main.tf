@@ -69,13 +69,18 @@ module "ecr_auth_lambda" {
 # ------------------------------------------------------------------------------
 # API Gateway
 # ------------------------------------------------------------------------------
+
 module "api_gateway" {
   source = "./modules/api_gateway"
 
-  name            = "${var.app_name}-api-gateway"
-  vpc_id          = module.vpc.vpc_id
-  vpc_cidr        = var.vpc_cidr
-  private_subnets = module.vpc.private_subnets
+  name                    = "${var.app_name}-api-gateway"
+  vpc_id                  = module.vpc.vpc_id
+  vpc_cidr                = var.vpc_cidr
+  private_subnets         = module.vpc.private_subnets
+  eks_node_group_asg_name = module.eks.node_group_autoscaling_group_names[0]
 
-  tags = { Project = var.app_name }
+  tags = {
+    Project     = "oficina"
+    Environment = "prod"
+  }
 }
