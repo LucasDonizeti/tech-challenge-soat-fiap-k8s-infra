@@ -26,7 +26,7 @@ module "vpc" {
 
   private_subnet_tags = {
     "kubernetes.io/role/internal-elb"           = "1"
-    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+    "kubernetes.io/cluster/${var.cluster_name}" = "shared"
   }
 
   tags = merge(var.tags, { Name = var.name })
