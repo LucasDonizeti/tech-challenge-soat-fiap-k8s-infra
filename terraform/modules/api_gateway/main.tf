@@ -50,8 +50,10 @@ resource "aws_lb_target_group" "eks_nodes_tg" {
   target_type = "instance"
 
   health_check {
-    protocol            = "TCP" # NLB faz validação em camada TCP na porta do NodePort
+    protocol            = "HTTP" # NLB faz validação em camada TCP na porta do NodePort
     port                = "30080"
+    path                = "/actuator/health"
+    matcher             = "200"
     interval            = 10
     healthy_threshold   = 2
     unhealthy_threshold = 2

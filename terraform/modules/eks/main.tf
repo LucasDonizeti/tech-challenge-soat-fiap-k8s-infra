@@ -69,6 +69,14 @@ resource "aws_security_group" "nodes" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  ingress {
+    description = "Permitir comunicacao HTTPS do Control Plane/VPC com os nodes"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -79,10 +87,21 @@ resource "aws_security_group" "nodes" {
   tags = merge(var.tags, { Name = "${var.cluster_name}-nodes-sg" })
 }
 
+# Regra no Security Group gerenciado do EKS para permitir o Health Check do NLB
+resource "aws_security_group_rule" "allow_nlb_health_check" {
+  type              = "ingress"
+  from_port         = 30080
+  to_port           = 30080
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_eks_cluster.this.vpc_config[0].cluster_security_group_id
+  description       = "Permitir Health Check do NLB na porta 30080"
+}
+
 # 3. Node Group Gerenciado — nodes ficam nas subnets privadas
 resource "aws_launch_template" "nodes" {
   name_prefix            = "${var.cluster_name}-node-lt-"
-  vpc_security_group_ids = [aws_security_group.nodes.id] # <--- Associa o SG customizado
+  vpc_security_group_ids = [aws_security_group.nodes.id]
 
   tags = var.tags
 
@@ -106,10 +125,10 @@ resource "aws_eks_node_group" "main" {
   instance_types = ["t3.medium"]
 
   # Associação do Launch Template
-  launch_template {
-    id      = aws_launch_template.nodes.id
-    version = aws_launch_template.nodes.latest_version
-  }
+  #launch_template {
+  #  id      = aws_launch_template.nodes.id
+  #  version = aws_launch_template.nodes.latest_version
+  #}
 
   tags = var.tags
 
@@ -122,7 +141,7 @@ resource "aws_eks_node_group" "main" {
 
 # 4. Add-ons
 resource "aws_eks_addon" "addons" {
-  for_each = toset(["vpc-cni", "kube-proxy", "coredns"])
+  for_each = toset(["vpc-cni", "kube-proxy"])
 
   cluster_name                = aws_eks_cluster.this.name
   addon_name                  = each.value
@@ -130,6 +149,25 @@ resource "aws_eks_addon" "addons" {
   resolve_conflicts_on_update = "OVERWRITE"
 
   depends_on = [aws_eks_node_group.main]
+}
+
+resource "aws_eks_addon" "coredns" {
+  cluster_name                = aws_eks_cluster.this.name
+  addon_name                  = "coredns"
+  resolve_conflicts_on_create = "OVERWRITE"
+
+  preserve = true
+
+  timeouts {
+    create = "10m"
+    update = "10m"
+  }
+
+  depends_on = [
+    aws_eks_node_group.main,
+    aws_eks_addon.addons["vpc-cni"],
+    aws_eks_addon.addons["kube-proxy"]
+  ]
 }
 
 # 5. Acesso para a LabRole
