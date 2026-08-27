@@ -52,3 +52,8 @@ output "private_subnets" {
   description = "IDs das subnets privadas para Lambda"
   value       = module.vpc.private_subnets
 }
+
+output "newrelic_integration_role_arn" {
+  description = "ARN da Role a ser colada no painel do New Relic"
+  value       = module.new_relic.newrelic_integration_role_arn
+}

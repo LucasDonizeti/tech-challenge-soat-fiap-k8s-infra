@@ -15,3 +15,14 @@ variable "vpc_cidr" {
   type        = string
   default     = "10.0.0.0/16"
 }
+
+variable "newrelic_account_id" {
+  description = "ID da conta do New Relic"
+  type        = string
+}
+
+variable "newrelic_api_key" {
+  description = "User/Personal API Key do New Relic para automação via Terraform"
+  type        = string
+  sensitive   = true
+}
