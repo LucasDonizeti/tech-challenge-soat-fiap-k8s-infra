@@ -14,6 +14,8 @@ env:
   TF_STATE_KEY: k8s/terraform.tfstate
   TF_DYNAMODB_TABLE: meu-terraform-state-lock
   EKS_CLUSTER_NAME: oficina-cluster
+  NEW_RELIC_API_KEY: ${{ secrets.NEW_RELIC_API_KEY }}
+  NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
 
 jobs:
   # JOB 1 — Bootstrap Terraform (S3 + DynamoDB + ECR)
@@ -96,6 +98,8 @@ jobs:
       - name: Terraform Plan
         run: |
           terraform plan \
+            -var="newrelic_account_id=${{ secrets.NEW_RELIC_ACCOUNT_ID }}" \
+            -var="newrelic_api_key=${{ secrets.NEW_RELIC_API_KEY }}" \
             -input=false \
             -out=tfplan
         working-directory: terraform

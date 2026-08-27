@@ -84,3 +84,12 @@ module "api_gateway" {
     Environment = "prod"
   }
 }
+
+module "new_relic" {
+  source = "./modules/new_relic"
+
+  tags = {
+    Project     = "oficina"
+    Environment = "prod"
+  }
+}
