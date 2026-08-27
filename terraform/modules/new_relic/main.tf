@@ -26,7 +26,12 @@ resource "aws_kinesis_firehose_delivery_stream" "newrelic_stream" {
     access_key         = var.newrelic_license_key
     s3_backup_mode     = "FailedDataOnly"
     role_arn           = local.lab_role_arn
-    content_encoding   = "GZIP"
+
+    # Parâmetros HTTP adicionais do Firehose devem ficar aqui:
+    parameters {
+      parameter_name  = "ContentEncoding"
+      parameter_value = "GZIP"
+    }
 
     s3_configuration {
       role_arn           = local.lab_role_arn
