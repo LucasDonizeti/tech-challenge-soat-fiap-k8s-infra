@@ -45,7 +45,7 @@ resource "aws_cloudwatch_metric_stream" "main" {
   name          = "newrelic-metric-stream"
   role_arn      = local.lab_role_arn
   firehose_arn  = aws_kinesis_firehose_delivery_stream.newrelic_stream.arn
-  output_format = "opentelemetry0.7"
+  output_format = "json"
 
   include_filter {
     namespace = "AWS/EKS"
@@ -59,25 +59,4 @@ resource "aws_cloudwatch_metric_stream" "main" {
   include_filter {
     namespace = "AWS/RDS"
   }
-
-}
-
-# 1. Permissão explícita para a LabRole publicar no Firehose
-resource "aws_iam_role_policy" "cloudwatch_firehose_inline" {
-  name = "cloudwatch-metrics-firehose-publish-policy"
-  role = "LabRole"
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Action = [
-          "firehose:PutRecord",
-          "firehose:PutRecordBatch"
-        ]
-        Resource = aws_kinesis_firehose_delivery_stream.newrelic_stream.arn
-      }
-    ]
-  })
 }
