@@ -88,6 +88,8 @@ module "api_gateway" {
 module "new_relic" {
   source = "./modules/new_relic"
 
+  newrelic_license_key = var.newrelic_license_key
+
   tags = {
     Project     = "oficina"
     Environment = "prod"

@@ -26,3 +26,9 @@ variable "newrelic_api_key" {
   type        = string
   sensitive   = true
 }
+
+variable "newrelic_license_key" {
+  description = "License Key de Ingestão do New Relic (Ingest - License)"
+  type        = string
+  sensitive   = true
+}

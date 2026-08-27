@@ -3,3 +3,8 @@ variable "tags" {
   type        = map(string)
   default     = {}
 }
+
+variable "newrelic_license_key" {
+  type      = string
+  sensitive = true
+}
