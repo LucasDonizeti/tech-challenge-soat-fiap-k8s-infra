@@ -151,7 +151,11 @@ jobs:
         working-directory: terraform
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve tfplan
+        run: |
+          terraform apply \
+            -var="newrelic_account_id=${{ secrets.NEW_RELIC_ACCOUNT_ID }}" \
+            -var="newrelic_api_key=${{ secrets.NEW_RELIC_API_KEY }}" \
+            -auto-approve
         working-directory: terraform
 
       - name: Configurar kubectl
