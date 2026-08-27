@@ -66,6 +66,5 @@ resource "aws_cloudwatch_metric_stream" "main" {
       metric_name = "CPUUtilization"
       namespace   = "AWS/EKS"
     }
-    additional_statistics = ["p95", "p99", "Average", "SampleCount", "Sum"]
   }
 }
