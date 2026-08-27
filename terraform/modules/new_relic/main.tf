@@ -46,4 +46,26 @@ resource "aws_cloudwatch_metric_stream" "main" {
   role_arn      = local.lab_role_arn
   firehose_arn  = aws_kinesis_firehose_delivery_stream.newrelic_stream.arn
   output_format = "opentelemetry0.7"
+
+  include_filter {
+    namespace = "AWS/EKS"
+  }
+  include_filter {
+    namespace = "AWS/ApiGateway"
+  }
+  include_filter {
+    namespace = "AWS/Lambda"
+  }
+  include_filter {
+    namespace = "AWS/RDS"
+  }
+
+  # Configura as estatísticas padrão para garantir a transmissão dos dados
+  statistics_configuration {
+    include_metric {
+      metric_name = "CPUUtilization"
+      namespace   = "AWS/EKS"
+    }
+    additional_statistics = ["p95", "p99", "Average", "SampleCount", "Sum"]
+  }
 }
