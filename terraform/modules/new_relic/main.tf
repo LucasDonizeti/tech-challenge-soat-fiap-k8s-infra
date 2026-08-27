@@ -60,11 +60,4 @@ resource "aws_cloudwatch_metric_stream" "main" {
     namespace = "AWS/RDS"
   }
 
-  # Configura as estatísticas padrão para garantir a transmissão dos dados
-  statistics_configuration {
-    include_metric {
-      metric_name = "CPUUtilization"
-      namespace   = "AWS/EKS"
-    }
-  }
 }
