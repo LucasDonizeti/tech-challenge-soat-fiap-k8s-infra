@@ -16,6 +16,7 @@ env:
   EKS_CLUSTER_NAME: oficina-cluster
   NEW_RELIC_API_KEY: ${{ secrets.NEW_RELIC_API_KEY }}
   NEW_RELIC_ACCOUNT_ID: ${{ secrets.NEW_RELIC_ACCOUNT_ID }}
+  NEW_RELIC_LICENSE_KEY: ${{ secrets.NEW_RELIC_LICENSE_KEY }}
 
 jobs:
   # JOB 1 — Bootstrap Terraform (S3 + DynamoDB + ECR)
@@ -100,6 +101,7 @@ jobs:
           terraform plan \
             -var="newrelic_account_id=${{ secrets.NEW_RELIC_ACCOUNT_ID }}" \
             -var="newrelic_api_key=${{ secrets.NEW_RELIC_API_KEY }}" \
+            -var="newrelic_license_key=${{ secrets.NEW_RELIC_LICENSE_KEY }}" \
             -input=false \
             -out=tfplan
         working-directory: terraform
@@ -155,6 +157,7 @@ jobs:
           terraform apply \
             -var="newrelic_account_id=${{ secrets.NEW_RELIC_ACCOUNT_ID }}" \
             -var="newrelic_api_key=${{ secrets.NEW_RELIC_API_KEY }}" \
+            -var="newrelic_license_key=${{ secrets.NEW_RELIC_LICENSE_KEY }}" \
             -auto-approve
         working-directory: terraform
 
