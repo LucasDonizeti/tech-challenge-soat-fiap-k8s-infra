@@ -61,3 +61,23 @@ resource "aws_cloudwatch_metric_stream" "main" {
   }
 
 }
+
+# 1. Permissão explícita para a LabRole publicar no Firehose
+resource "aws_iam_role_policy" "cloudwatch_firehose_inline" {
+  name = "cloudwatch-metrics-firehose-publish-policy"
+  role = "LabRole"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "firehose:PutRecord",
+          "firehose:PutRecordBatch"
+        ]
+        Resource = aws_kinesis_firehose_delivery_stream.newrelic_stream.arn
+      }
+    ]
+  })
+}
