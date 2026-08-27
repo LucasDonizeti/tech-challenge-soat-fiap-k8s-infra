@@ -21,16 +21,15 @@ resource "aws_kinesis_firehose_delivery_stream" "newrelic_stream" {
   destination = "http_endpoint"
 
   http_endpoint_configuration {
-    url                = "https://aws-api.newrelic.com/cloudwatch-metrics/v1"
-    name               = "New Relic Metrics Endpoint"
-    access_key         = var.newrelic_license_key
-    s3_backup_mode     = "FailedDataOnly"
-    role_arn           = local.lab_role_arn
+    url            = "https://aws-api.newrelic.com/cloudwatch-metrics/v1"
+    name           = "New Relic Metrics Endpoint"
+    access_key     = var.newrelic_license_key
+    s3_backup_mode = "FailedDataOnly"
+    role_arn       = local.lab_role_arn
 
-    # Parâmetros HTTP adicionais do Firehose devem ficar aqui:
-    parameters {
-      parameter_name  = "ContentEncoding"
-      parameter_value = "GZIP"
+    # Configuração de compressão HTTP
+    request_configuration {
+      content_encoding = "GZIP"
     }
 
     s3_configuration {
