@@ -32,6 +32,8 @@ resource "aws_kinesis_firehose_delivery_stream" "newrelic_stream" {
       content_encoding = "GZIP"
     }
 
+    buffering_interval = 60
+
     s3_configuration {
       role_arn           = local.lab_role_arn
       bucket_arn         = aws_s3_bucket.firehose_backup.arn
