@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    newrelic = {
+      source  = "newrelic/newrelic"
+      version = "~> 3.0"
+    }
+  }
+}
+
 # Busca a LabRole pré-existente no ambiente AWS Academy
 data "aws_iam_role" "lab_role" {
   name = "LabRole"
