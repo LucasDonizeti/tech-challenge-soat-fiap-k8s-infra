@@ -21,13 +21,12 @@ resource "newrelic_synthetics_monitor" "app_ping" {
   status           = "ENABLED"
   locations_public = ["AWS_SA_EAST_1"]
 
-  verify_ssl        = false
+  verify_ssl       = false
 }
 
-resource "newrelic_one_dashboard_raw" "tech_challenge_dashboard" {
-  name = "Oficina API Monitor"
-
-  json_data = file("${path.module}/dashboard.json")
+# Dashboard criado via JSON bruto usando o recurso oficial
+resource "newrelic_one_dashboard_json" "tech_challenge_dashboard" {
+  json = file("${path.module}/dashboard.json")
 }
 
 #data "aws_caller_identity" "current" {}
