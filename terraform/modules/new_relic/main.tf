@@ -3,6 +3,24 @@ data "aws_iam_role" "lab_role" {
   name = "LabRole"
 }
 
+
+resource "newrelic_synthetics_monitor" "app_ping" {
+  name             = "Ping oficina-api"
+  type             = "SIMPLE"
+  uri              = "${var.api_endpoint}/actuator/health/liveness"
+  period           = "EVERY_15_MINUTES"
+  status           = "ENABLED"
+  locations_public = ["AWS_SA_EAST_1"]
+
+  verify_ssl        = false
+}
+
+resource "newrelic_one_dashboard_raw" "tech_challenge_dashboard" {
+  name = "Oficina API Monitor"
+
+  json_data = file("${path.module}/dashboard.json")
+}
+
 #data "aws_caller_identity" "current" {}
 
 #locals {
