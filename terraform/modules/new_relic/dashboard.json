@@ -4,12 +4,12 @@
   "permissions": "PUBLIC_READ_WRITE",
   "pages": [
     {
-      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNTk3NTY2",
+      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNjA0ODQy",
       "name": "Oficina API Dashboard",
       "description": null,
       "widgets": [
         {
-          "id": "564877027",
+          "id": "564998220",
           "title": null,
           "layout": {
             "column": 1,
@@ -26,7 +26,7 @@
           }
         },
         {
-          "id": "564923976",
+          "id": "564998221",
           "title": "Network traffic",
           "layout": {
             "column": 9,
@@ -83,7 +83,7 @@
           }
         },
         {
-          "id": "564876197",
+          "id": "564998222",
           "title": "Storage Used (%)",
           "layout": {
             "column": 1,
@@ -140,7 +140,7 @@
           }
         },
         {
-          "id": "564876118",
+          "id": "564998223",
           "title": "CPU used (%)",
           "layout": {
             "column": 3,
@@ -197,7 +197,7 @@
           }
         },
         {
-          "id": "564876192",
+          "id": "564998224",
           "title": "Memory Used (%)",
           "layout": {
             "column": 6,
@@ -254,8 +254,8 @@
           }
         },
         {
-          "id": "564876685",
-          "title": "",
+          "id": "564998225",
+          "title": null,
           "layout": {
             "column": 1,
             "row": 4,
@@ -271,8 +271,8 @@
           }
         },
         {
-          "id": "564877410",
-          "title": "",
+          "id": "564998226",
+          "title": null,
           "layout": {
             "column": 8,
             "row": 4,
@@ -307,8 +307,8 @@
           }
         },
         {
-          "id": "564877413",
-          "title": "",
+          "id": "564998227",
+          "title": null,
           "layout": {
             "column": 1,
             "row": 5,
@@ -340,8 +340,8 @@
           }
         },
         {
-          "id": "564877418",
-          "title": "",
+          "id": "564998228",
+          "title": null,
           "layout": {
             "column": 2,
             "row": 5,
@@ -385,8 +385,8 @@
           }
         },
         {
-          "id": "564877422",
-          "title": "",
+          "id": "564998229",
+          "title": null,
           "layout": {
             "column": 3,
             "row": 5,
@@ -418,8 +418,8 @@
           }
         },
         {
-          "id": "564877420",
-          "title": "",
+          "id": "564998230",
+          "title": null,
           "layout": {
             "column": 4,
             "row": 5,
@@ -451,7 +451,7 @@
           }
         },
         {
-          "id": "564877781",
+          "id": "564998231",
           "title": "Replicas count",
           "layout": {
             "column": 5,
@@ -508,7 +508,7 @@
           }
         },
         {
-          "id": "564877783",
+          "id": "564998232",
           "title": "Replicas availability",
           "layout": {
             "column": 8,
@@ -565,7 +565,7 @@
           }
         },
         {
-          "id": "564877784",
+          "id": "564998233",
           "title": "Updated replicas",
           "layout": {
             "column": 10,
@@ -622,8 +622,8 @@
           }
         },
         {
-          "id": "564877419",
-          "title": "",
+          "id": "564998234",
+          "title": null,
           "layout": {
             "column": 1,
             "row": 6,
@@ -673,8 +673,8 @@
           }
         },
         {
-          "id": "564877411",
-          "title": "",
+          "id": "564998235",
+          "title": null,
           "layout": {
             "column": 2,
             "row": 6,
@@ -706,8 +706,8 @@
           }
         },
         {
-          "id": "564877416",
-          "title": "",
+          "id": "564998236",
+          "title": null,
           "layout": {
             "column": 3,
             "row": 6,
@@ -739,8 +739,8 @@
           }
         },
         {
-          "id": "564877412",
-          "title": "",
+          "id": "564998237",
+          "title": null,
           "layout": {
             "column": 4,
             "row": 6,
@@ -772,7 +772,7 @@
           }
         },
         {
-          "id": "564905162",
+          "id": "564998238",
           "title": "Consumo de CPU por POD",
           "layout": {
             "column": 1,
@@ -811,7 +811,7 @@
                 "accountIds": [
                   8446279
                 ],
-                "query": "SELECT average(k8s.pod.cpuUsedCores) FROM Metric FACET k8s.podName TIMESERIES"
+                "query": "SELECT average(cpuUsedCores) FROM K8sPodSample FACET podName TIMESERIES"
               }
             ],
             "platformOptions": {
@@ -829,7 +829,7 @@
           }
         },
         {
-          "id": "564905384",
+          "id": "564998239",
           "title": "Memória por Namespace",
           "layout": {
             "column": 5,
@@ -868,7 +868,7 @@
                 "accountIds": [
                   8446279
                 ],
-                "query": "SELECT average(k8s.pod.memoryUsedBytes) / 1024 / 1024 AS 'Memory (MB)' FROM Metric FACET k8s.namespaceName TIMESERIES"
+                "query": "SELECT average(memoryUsedBytes) / 1024 / 1024 AS 'Memory (MB)' FROM K8sPodSample FACET namespace TIMESERIES"
               }
             ],
             "platformOptions": {
@@ -886,7 +886,7 @@
           }
         },
         {
-          "id": "564905666",
+          "id": "564998240",
           "title": "Restarts",
           "layout": {
             "column": 9,
@@ -925,7 +925,7 @@
                 "accountIds": [
                   8446279
                 ],
-                "query": "SELECT sum(k8s.container.restartCount) FROM Metric FACET k8s.podName TIMESERIES"
+                "query": "SELECT max(restartCount) - min(restartCount) AS 'Restarts' FROM K8sContainerSample FACET podName TIMESERIES"
               }
             ],
             "platformOptions": {
@@ -945,12 +945,12 @@
       ]
     },
     {
-      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNTk3ODUy",
+      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNjA0ODQz",
       "name": "Logs",
       "description": null,
       "widgets": [
         {
-          "id": "564878533",
+          "id": "564998241",
           "title": "Logs found",
           "layout": {
             "column": 1,
@@ -1007,7 +1007,7 @@
           }
         },
         {
-          "id": "564904976",
+          "id": "564998242",
           "title": null,
           "layout": {
             "column": 1,
@@ -1031,12 +1031,12 @@
       ]
     },
     {
-      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNTk5MTg2",
+      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNjA0ODQ0",
       "name": "Ordens de Serviço",
       "description": null,
       "widgets": [
         {
-          "id": "564905897",
+          "id": "564998243",
           "title": "Volume de ordens de serviço",
           "layout": {
             "column": 1,
@@ -1093,7 +1093,7 @@
           }
         },
         {
-          "id": "564906155",
+          "id": "564998244",
           "title": "Tempo médio de execução por status",
           "layout": {
             "column": 5,
@@ -1103,11 +1103,13 @@
           },
           "linkedEntityGuids": null,
           "visualization": {
-            "id": "viz.line"
+            "id": "viz.stacked-bar"
           },
           "rawConfiguration": {
             "chartStyles": {
-              "lineInterpolation": "linear"
+              "gradient": {
+                "enabled": false
+              }
             },
             "colors": {
               "colorPalette": "consistent"
@@ -1132,7 +1134,7 @@
                 "accountIds": [
                   8446279
                 ],
-                "query": "SELECT average(duration_seconds) FROM Log WHERE status IN ('DIAGNOSTICO', 'EXECUCAO', 'FINALIZACAO') FACET status SINCE 7 DAYS AGO TIMESERIES 1 day"
+                "query": "SELECT average(duration) \r\nFROM (\r\n  SELECT (max(timestamp) - min(timestamp)) / 1000 AS duration \r\n  FROM Log \r\n  WHERE message LIKE '%Status da OS alterado%' \r\n  FACET aparse(message, 'OS ID: % ,') AS osId, aparse(message, 'Status Atual: % ,') AS statusAtual\r\n) \r\nFACET statusAtual \r\nSINCE 7 DAYS AGO"
               }
             ],
             "platformOptions": {
@@ -1140,17 +1142,11 @@
             },
             "thresholds": {
               "isLabelVisible": true
-            },
-            "yAxisLeft": {
-              "zero": true
-            },
-            "yAxisRight": {
-              "zero": true
             }
           }
         },
         {
-          "id": "564906212",
+          "id": "564998245",
           "title": "Falhas de integração",
           "layout": {
             "column": 9,
@@ -1207,7 +1203,7 @@
           }
         },
         {
-          "id": "564906213",
+          "id": "564998246",
           "title": "Latencia das APIs",
           "layout": {
             "column": 1,
@@ -1246,7 +1242,7 @@
                 "accountIds": [
                   8446279
                 ],
-                "query": "SELECT average(duration), percentile(duration, 95, 99) FROM Transaction WHERE appName = 'oficina-api' SINCE 7 DAYS AGO TIMESERIES 1 day"
+                "query": "SELECT average(duration), percentile(duration, 95, 99) FROM Transaction SINCE 7 DAYS AGO TIMESERIES 1 day"
               }
             ],
             "platformOptions": {
@@ -1264,7 +1260,7 @@
           }
         },
         {
-          "id": "564906217",
+          "id": "564998247",
           "title": "Consumo de Recursos Kubernetes",
           "layout": {
             "column": 5,
@@ -1303,7 +1299,7 @@
                 "accountIds": [
                   8446279
                 ],
-                "query": "SELECT average(k8s.pod.cpuUsedCores) AS 'CPU (Cores)', average(k8s.pod.memoryUsedBytes) / 1024 / 1024 AS 'Memória (MB)' FROM Metric WHERE k8s.clusterName = 'oficina-cluster' FACET k8s.podName SINCE 7 DAYS AGO TIMESERIES 1 day"
+                "query": "SELECT average(cpuUsedCores) FROM K8sPodSample FACET podName TIMESERIES"
               }
             ],
             "platformOptions": {
@@ -1321,7 +1317,7 @@
           }
         },
         {
-          "id": "564916763",
+          "id": "564998248",
           "title": "Falhas de processamento",
           "layout": {
             "column": 9,
@@ -1356,12 +1352,12 @@
       ]
     },
     {
-      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNTk5NDE0",
+      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNjA0ODQ1",
       "name": "Healthcheck",
       "description": null,
       "widgets": [
         {
-          "id": "564915934",
+          "id": "564998249",
           "title": "Request & response time",
           "layout": {
             "column": 1,
@@ -1400,7 +1396,7 @@
                 "accountIds": [
                   8446279
                 ],
-                "query": "SELECT average(durationSend) AS 'Send', average(durationWait) AS 'Wait', average(durationReceive) AS 'Receive' FROM SyntheticRequest WHERE monitorId = '1a8f08c3-4513-40db-8413-e7f314b510d0'  TIMESERIES 7 minutes SINCE 30 MINUTES AGO"
+                "query": "SELECT average(duration) AS 'Tempo Total (ms)' FROM SyntheticCheck WHERE monitorName = 'Ping oficina-api' TIMESERIES SINCE 30 MINUTES AGO"
               }
             ],
             "platformOptions": {
@@ -1418,7 +1414,7 @@
           }
         },
         {
-          "id": "564915963",
+          "id": "564998250",
           "title": "Connection times",
           "layout": {
             "column": 5,
@@ -1431,23 +1427,51 @@
             "id": "viz.line"
           },
           "rawConfiguration": {
+            "chartStyles": {
+              "lineInterpolation": "linear"
+            },
+            "colors": {
+              "colorPalette": "consistent"
+            },
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "markers": {
+              "displayedTypes": {
+                "annotations": true,
+                "criticalViolations": false,
+                "deployments": true,
+                "relatedDeployments": true,
+                "warningViolations": false
+              }
+            },
             "nrqlQueries": [
               {
                 "accountIds": [
                   8446279
                 ],
-                "query": "SELECT average(durationConnect) as 'Connect', average(durationDNS) AS 'DNS', average(durationSSL) as 'SSL' FROM SyntheticRequest WHERE monitorId = '1a8f08c3-4513-40db-8413-e7f314b510d0'  TIMESERIES 7 minutes SINCE 30 MINUTES AGO"
+                "query": "SELECT average(duration) AS 'Duração' FROM SyntheticCheck WHERE monitorName = 'Ping oficina-api' FACET result TIMESERIES SINCE 30 MINUTES AGO"
               }
             ],
-            "timeRange": {
-              "begin_time": null,
-              "duration": 1800000,
-              "end_time": null
+            "platformOptions": {
+              "ignoreTimeRange": false
+            },
+            "thresholds": {
+              "isLabelVisible": true
+            },
+            "yAxisLeft": {
+              "zero": true
+            },
+            "yAxisRight": {
+              "zero": true
             }
           }
         },
         {
-          "id": "564916023",
+          "id": "564998251",
           "title": "Error response codes",
           "layout": {
             "column": 9,
@@ -1476,7 +1500,7 @@
           }
         },
         {
-          "id": "564916434",
+          "id": "564998252",
           "title": null,
           "layout": {
             "column": 1,
