@@ -4,12 +4,12 @@
   "permissions": "PUBLIC_READ_WRITE",
   "pages": [
     {
-      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNjA0ODQy",
+      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNjMyMjE5",
       "name": "Oficina API Dashboard",
       "description": null,
       "widgets": [
         {
-          "id": "564998220",
+          "id": "565356965",
           "title": null,
           "layout": {
             "column": 1,
@@ -26,7 +26,7 @@
           }
         },
         {
-          "id": "564998221",
+          "id": "565356966",
           "title": "Network traffic",
           "layout": {
             "column": 9,
@@ -83,7 +83,7 @@
           }
         },
         {
-          "id": "564998222",
+          "id": "565356967",
           "title": "Storage Used (%)",
           "layout": {
             "column": 1,
@@ -140,7 +140,7 @@
           }
         },
         {
-          "id": "564998223",
+          "id": "565356968",
           "title": "CPU used (%)",
           "layout": {
             "column": 3,
@@ -197,7 +197,7 @@
           }
         },
         {
-          "id": "564998224",
+          "id": "565356969",
           "title": "Memory Used (%)",
           "layout": {
             "column": 6,
@@ -254,7 +254,7 @@
           }
         },
         {
-          "id": "564998225",
+          "id": "565356970",
           "title": null,
           "layout": {
             "column": 1,
@@ -271,7 +271,7 @@
           }
         },
         {
-          "id": "564998226",
+          "id": "565356971",
           "title": null,
           "layout": {
             "column": 8,
@@ -307,7 +307,7 @@
           }
         },
         {
-          "id": "564998227",
+          "id": "565356972",
           "title": null,
           "layout": {
             "column": 1,
@@ -340,7 +340,7 @@
           }
         },
         {
-          "id": "564998228",
+          "id": "565356973",
           "title": null,
           "layout": {
             "column": 2,
@@ -385,7 +385,7 @@
           }
         },
         {
-          "id": "564998229",
+          "id": "565356974",
           "title": null,
           "layout": {
             "column": 3,
@@ -418,7 +418,7 @@
           }
         },
         {
-          "id": "564998230",
+          "id": "565356975",
           "title": null,
           "layout": {
             "column": 4,
@@ -451,7 +451,7 @@
           }
         },
         {
-          "id": "564998231",
+          "id": "565356976",
           "title": "Replicas count",
           "layout": {
             "column": 5,
@@ -508,7 +508,7 @@
           }
         },
         {
-          "id": "564998232",
+          "id": "565356977",
           "title": "Replicas availability",
           "layout": {
             "column": 8,
@@ -565,7 +565,7 @@
           }
         },
         {
-          "id": "564998233",
+          "id": "565356978",
           "title": "Updated replicas",
           "layout": {
             "column": 10,
@@ -622,7 +622,7 @@
           }
         },
         {
-          "id": "564998234",
+          "id": "565356979",
           "title": null,
           "layout": {
             "column": 1,
@@ -673,7 +673,7 @@
           }
         },
         {
-          "id": "564998235",
+          "id": "565356980",
           "title": null,
           "layout": {
             "column": 2,
@@ -706,7 +706,7 @@
           }
         },
         {
-          "id": "564998236",
+          "id": "565356981",
           "title": null,
           "layout": {
             "column": 3,
@@ -739,7 +739,7 @@
           }
         },
         {
-          "id": "564998237",
+          "id": "565356982",
           "title": null,
           "layout": {
             "column": 4,
@@ -772,7 +772,7 @@
           }
         },
         {
-          "id": "564998238",
+          "id": "565356983",
           "title": "Consumo de CPU por POD",
           "layout": {
             "column": 1,
@@ -829,7 +829,7 @@
           }
         },
         {
-          "id": "564998239",
+          "id": "565356984",
           "title": "Memória por Namespace",
           "layout": {
             "column": 5,
@@ -886,7 +886,7 @@
           }
         },
         {
-          "id": "564998240",
+          "id": "565356985",
           "title": "Restarts",
           "layout": {
             "column": 9,
@@ -945,12 +945,12 @@
       ]
     },
     {
-      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNjA0ODQz",
+      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNjMyMjIw",
       "name": "Logs",
       "description": null,
       "widgets": [
         {
-          "id": "564998241",
+          "id": "565356986",
           "title": "Logs found",
           "layout": {
             "column": 1,
@@ -1007,7 +1007,7 @@
           }
         },
         {
-          "id": "564998242",
+          "id": "565356987",
           "title": null,
           "layout": {
             "column": 1,
@@ -1031,12 +1031,12 @@
       ]
     },
     {
-      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNjA0ODQ0",
+      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNjMyMjIx",
       "name": "Ordens de Serviço",
       "description": null,
       "widgets": [
         {
-          "id": "564998243",
+          "id": "565356988",
           "title": "Volume de ordens de serviço",
           "layout": {
             "column": 1,
@@ -1093,7 +1093,7 @@
           }
         },
         {
-          "id": "564998244",
+          "id": "565356989",
           "title": "Tempo médio de execução por status",
           "layout": {
             "column": 5,
@@ -1134,7 +1134,7 @@
                 "accountIds": [
                   8446279
                 ],
-                "query": "SELECT average(duration) \r\nFROM (\r\n  SELECT (max(timestamp) - min(timestamp)) / 1000 AS duration \r\n  FROM Log \r\n  WHERE message LIKE '%Status da OS alterado%' \r\n  FACET aparse(message, 'OS ID: % ,') AS osId, aparse(message, 'Status Atual: % ,') AS statusAtual\r\n) \r\nFACET statusAtual \r\nSINCE 7 DAYS AGO"
+                "query": "FROM Log \r\nWITH aparse(message, 'Status da OS alterado - OS ID: *, Status Anterior: *, Status Atual: *, Tempo entre mudanças: *s') AS (os_id, status_anterior, status_atual, tempo_texto)\r\nSELECT \r\n  average(numeric(tempo_texto)) AS 'Tempo Médio (s)'\r\nWHERE message LIKE '%Status da OS alterado%'\r\nFACET status_anterior\r\nSINCE 3 HOURS AGO"
               }
             ],
             "platformOptions": {
@@ -1146,7 +1146,7 @@
           }
         },
         {
-          "id": "564998245",
+          "id": "565356990",
           "title": "Falhas de integração",
           "layout": {
             "column": 9,
@@ -1203,7 +1203,7 @@
           }
         },
         {
-          "id": "564998246",
+          "id": "565356991",
           "title": "Latencia das APIs",
           "layout": {
             "column": 1,
@@ -1260,7 +1260,7 @@
           }
         },
         {
-          "id": "564998247",
+          "id": "565356992",
           "title": "Consumo de Recursos Kubernetes",
           "layout": {
             "column": 5,
@@ -1317,7 +1317,7 @@
           }
         },
         {
-          "id": "564998248",
+          "id": "565356993",
           "title": "Falhas de processamento",
           "layout": {
             "column": 9,
@@ -1352,12 +1352,12 @@
       ]
     },
     {
-      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNjA0ODQ1",
+      "guid": "ODQ0NjI3OXxWSVp8REFTSEJPQVJEfDUwNjMyMjIy",
       "name": "Healthcheck",
       "description": null,
       "widgets": [
         {
-          "id": "564998249",
+          "id": "565356994",
           "title": "Request & response time",
           "layout": {
             "column": 1,
@@ -1414,7 +1414,7 @@
           }
         },
         {
-          "id": "564998250",
+          "id": "565356995",
           "title": "Connection times",
           "layout": {
             "column": 5,
@@ -1471,7 +1471,7 @@
           }
         },
         {
-          "id": "564998251",
+          "id": "565356996",
           "title": "Error response codes",
           "layout": {
             "column": 9,
@@ -1500,7 +1500,7 @@
           }
         },
         {
-          "id": "564998252",
+          "id": "565356997",
           "title": null,
           "layout": {
             "column": 1,
