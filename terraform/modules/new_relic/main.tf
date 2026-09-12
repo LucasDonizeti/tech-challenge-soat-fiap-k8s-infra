@@ -17,7 +17,7 @@ resource "newrelic_synthetics_monitor" "app_ping" {
   name             = "Ping oficina-api"
   type             = "SIMPLE"
   uri              = "${var.api_endpoint}/actuator/health/liveness"
-  period           = "EVERY_2_MINUTES"
+  period           = "EVERY_5_MINUTES"
   status           = "ENABLED"
   locations_public = ["AWS_SA_EAST_1"]
 
